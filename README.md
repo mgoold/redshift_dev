@@ -16,5 +16,48 @@ Each section below has the following pattern:
 
 ## Sections
 ### Working with session data.
-Python to Generate Code: 
+* Notebook to Generate Code: [test_sessiondata.ipynb](https://github.com/mgoold/redshift_dev/blob/main/test_code/test_sessiondata.ipynb)
+* Sql file with related practice: [test_sessiondata.sql](https://github.com/mgoold/redshift_dev/blob/main/test_code/test_sessiondata.sql)
+* Practice Data Sheet Name: test_sessiondata
+* Topics in This Section:
+  * Creating Session ID on Raw Session Data
+  * Given 2 data sets, write me a query that combines the datasets but excludes customers who are in both.
+
+### Working with user timed event data.
+* Notebook to Generate Code: [user_timeevents.ipynb](https://github.com/mgoold/redshift_dev/blob/main/test_code/user_timeevents.ipynb)
+* Sql file with related practice: [user_timedevents.sql](https://github.com/mgoold/redshift_dev/blob/main/test_code/user_timedevents.sql)
+* Practice Data Sheet Name: user_timeevents
+* Topics in This Section:
+  * Calculate percentage metrics
+  * Calculate average date difference
+
+### Working with company user event data.
+* Notebook to Generate Code: [test_companyuserdata.ipynb](https://github.com/mgoold/redshift_dev/blob/main/test_code/test_companyuserdata.ipynb)
+* Sql file with related practice: [test_companyuserdata.sql](https://github.com/mgoold/redshift_dev/blob/main/test_code/test_companyuserdata.sql)
+* Practice Data Sheet Name: test_companyuserdata
+* Topics in This Section:
+  * Catching duplicate rows.
+  * Reviewing duplicates by rank
+  * Finding Nth Row
+  * Finding even or odd rows
+  * Finding rows with value above average
+
+### Working with tree data.
+* Notebook to Generate Code: [tree_text_for_sql.ipynb](https://github.com/mgoold/redshift_dev/blob/main/test_code/tree_text_for_sql.ipynb)
+* Sql file with related practice: [tree_text_for_sql.sql](https://github.com/mgoold/redshift_dev/blob/main/test_code/tree_text_for_sql.sql)
+* Practice Data Sheet Name: tree_text_for_sql
+* Topics in This Section:
+  * distinguishing root, inner, and leaf nodes
+
+### Working with tree data.
+* Notebook to Generate Code: [user_retention_test.ipynb](https://github.com/mgoold/redshift_dev/blob/main/test_code/user_retention_test.ipynb)
+* Sql file with related practice: [user_retention_test.sql](https://github.com/mgoold/redshift_dev/blob/main/test_code/user_retention_test.sql)
+* Practice Data Sheet Name: user_retention_test
+  * finding users who are entering for the first time
+  * finding users who have not been seen for n days
+  * finding users retained from previous month
+
+
+
+
 
