@@ -15,5 +15,6 @@ Each section below has the following pattern:
 * questions covered in this section
 
 ## Sections
-
+### Working with session data.
+Python to Generate Code: 
 
