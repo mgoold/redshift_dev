@@ -1,6 +1,6 @@
 # Redshift Devlopment Practice
 
-## This repo is dedicated to doing postgresql code and includes the python code for faking the data to use in practice.
+## This repo is dedicated to practicing postgresql code and includes the python code for faking the data to use in that practice.
 ### Assumptions
 This practice assumes that: 
 * you've run the notebooks to create the redshift data to load into the tables.  The related code for each exercise 
