@@ -12,7 +12,7 @@ Each section below has the following pattern:
 * jupyter notebook used to generate practice data
 * practice data sheet name
 * sql file with related practice
-* questions covered in this section
+* topics covered in this section
 
 ## Sections
 ### Working with session data.
