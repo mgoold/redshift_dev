@@ -51,7 +51,8 @@ order by 1 desc
 
 -- /* the inside outsky */
 -- /* this simple QA query is a staple */
--- /* use this to see which rows have the greatest counts of duplicates  */
+-- /* use this to see the degree to which multiples have the greatest degree of usage  */
+-- /* a common use case would be the ranking of the number of unique items purchased at checkout, by user count */
 
 select 
 departmentcount
