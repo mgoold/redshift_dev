@@ -49,7 +49,7 @@ Each section below has the following pattern:
 * Topics in This Section:
   * distinguishing root, inner, and leaf nodes
 
-### Working with tree data.
+### Working with retention data.
 * Notebook to Generate Code: [user_retention_test.ipynb](https://github.com/mgoold/redshift_dev/blob/main/test_code/user_retention_test.ipynb)
 * Sql file with related practice: [user_retention_test.sql](https://github.com/mgoold/redshift_dev/blob/main/test_code/user_retention_test.sql)
 * Practice Data Sheet Name: user_retention_test
