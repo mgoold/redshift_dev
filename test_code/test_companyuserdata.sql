@@ -101,6 +101,7 @@ from
 	t1.userid
 	,row_number() over () row_number -- will create a unique num for every row when not partitioned
 	from test2_companyuserdata t1
+	order by 1 -- have to order or you won't get same result every time
 ) t1
 where t1.row_number % 2=1 -- divide it by 2 and if it’s odd should have 1 as residual
 order by t1.row_number
