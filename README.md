@@ -58,6 +58,9 @@ Each section below has the following pattern:
   * finding users retained from previous month
   * Combine Daily Count with Running Count
 
+### Miscellaneous Issues. 
+  * Sql file with related practice: https://github.com/mgoold/redshift_dev/blob/main/test_code/miscellany.sql
+
 
 
 
