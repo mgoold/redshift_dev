@@ -148,3 +148,63 @@ from
 ) t1
 where date>='2020-01-01' and date<='2020-12-31'
 group by 1,2
+
+--Percent Calculations
+
+-- /* create tables for user timed events sql questions */
+
+drop table if exists user_timedevents;
+
+CREATE TABLE IF NOT EXISTS user_timedevents 
+(
+	userid integer,
+	acct_create_date timestamp without time zone, 
+	save_home_date timestamp without time zone,
+	state varchar(2)
+);
+
+
+COPY user_timedevents 
+FROM '/Users/ouonomos/git_repo/redshift_dev/test_data/user_timeevents.csv' DELIMITERS E'\t' 
+CSV HEADER
+;
+
+--Table 1 has userID and State, Table 2 has UserID, saved home, Date of saving home. 
+
+drop table if exists user_state;
+
+CREATE TABLE IF NOT EXISTS user_state
+as
+select userid, acct_create_date, state
+from user_timedevents
+;
+
+drop table if exists user_open_save;
+
+CREATE TABLE IF NOT EXISTS user_open_save
+as
+select userid, save_home_date
+from user_timedevents
+;
+
+--/*How to Calculate Percent Calculation*/
+--Table 1 has userID and State, Table 2 has UserID, saved home, Date of saving home. 
+--Write me a query that tells me what percent of users in a state have saved a home.
+
+--Answer:
+
+select
+t2.state
+,count(distinct case when t1.save_home_date is not null then t1.userid end) uusers_w_saved_home
+,count(distinct t1.userid) unique_users
+,round(100.0 * count(distinct case when t1.save_home_date is not null then t1.userid end) 
+/count(distinct t1.userid),1) pct_uusers_w_saved_home
+from user_open_save t1
+left join user_state t2 on t1.userid=t2.userid
+group by 1
+order by 1
+;
+
+
+
+
