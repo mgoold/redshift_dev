@@ -85,5 +85,78 @@ group by 1
 order by 1
 ;
 
+--Medium Difficulty: Combine Daily Count with Running Count
+
+--Given a table like:
+
+--Table: userdays
+--+---------------+---------+
+--| Column Name   | Type    |
+--+---------------+---------+
+--| user_id   | int     |
+--| activity_date | date |
+--+---------------+---------+
+
+--create a query that, for each active day, counts unique active users on that day, and unique active users within the last 7 days (the current day through the previous 6 days).  The table should be structured like:
+
+--Table: active_users
+--+---------------+---------+
+--| Column Name   | Type    |
+--+---------------+---------+
+--| activity_date | date |
+--| daily_unique_active_users | int |
+--| weekly_unique_active_users | int |
+--+---------------+---------+
+
+--Answer:
 
 
+drop table if exists userdays;
+
+create table userdays
+(
+	activedate date,
+	uid int
+)
+;
+
+insert into userdays
+values
+('9-23-2023',1),
+('9-23-2023',3),
+('9-24-2023',1),
+('9-24-2023',2),
+('9-24-2023',3),
+('9-25-2023',1),
+('9-25-2023',2),
+('9-25-2023',3),
+('9-25-2023',4),
+('9-26-2023',1),
+('9-26-2023',2),
+('9-26-2023',3),
+('9-26-2023',4),
+('9-27-2023',1),
+('9-27-2023',2),
+('9-27-2023',3),
+('9-27-2023',4)
+;
+
+
+select
+activity_date
+,ucount
+,sum(ucount) uad
+,sum(ucount) over (order by t1.activity_date rows between 3 preceding and current row) wau
+from
+(
+	select
+	to_date(t1.activedate::text,'YYYY-MM-DD') activity_date
+	,t1.uid
+	,1 ucount
+	,count(*)
+	from userdays t1
+	group by 1,2,3
+) t1
+group by 1,ucount
+order by 1 desc,ucount
+;
