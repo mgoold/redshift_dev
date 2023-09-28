@@ -205,6 +205,29 @@ group by 1
 order by 1
 ;
 
+Average Date Diff
+See here for data set creation.
+
+--/* Average Date Diff */
+--Question: "Table 1 has UserID and save_home_date, Table 2 has User ID, state, and acct_create_date. 
+--Write me a function that tells me the average time it takes between a user makes an account and saves a home."
+– Answer
+
+select
+date_trunc('MONTH',t2.acct_create_date) month_opened
+,count(distinct t1.userid) uusers
+,count(distinct case when t2.acct_create_date is not null then t1.userid end) uusers_w_acct_created
+,count(distinct case when t1.save_home_date is not null then t1.userid end) uusers_w_save_home
+,avg(case when t1.save_home_date is not null then DATE_PART('Day', t1.save_home_date::TIMESTAMP - t2.acct_create_date::TIMESTAMP) end) avg_saved_date
+from user_open_save t1
+left join user_state t2 on t1.userid=t2.userid
+where 1=1
+and t2.acct_create_date is not null
+group by 1
+order by 1
+;
+
+
 
 
 
