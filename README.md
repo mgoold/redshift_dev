@@ -56,6 +56,7 @@ Each section below has the following pattern:
   * finding users who are entering for the first time
   * finding users who have not been seen for n days
   * finding users retained from previous month
+  * Combine Daily Count with Running Count
 
 
 
