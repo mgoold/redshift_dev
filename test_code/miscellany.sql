@@ -205,8 +205,8 @@ group by 1
 order by 1
 ;
 
-Average Date Diff
-See here for data set creation.
+--Average Date Diff
+--See here for data set creation.
 
 --/* Average Date Diff */
 --Question: "Table 1 has UserID and save_home_date, Table 2 has User ID, state, and acct_create_date. 
@@ -226,6 +226,78 @@ and t2.acct_create_date is not null
 group by 1
 order by 1
 ;
+
+-- FIND ITEMS WITH VALUES QUALIFIED ON BAND EXTREMES
+
+-- Given the below tables, find the suspicious drivers who, on any route never hit the speed limit or are the slowest drivers 
+	-- the suspicious drivers will have driven at least one route
+
+drop table if exists driver;
+
+create table driver
+(
+	driver_id int,
+	driver_name varchar
+)
+;
+
+Insert into driver
+values
+(1,'driver1'),
+(2,'driver2'),
+(3,'driver3'),
+(4,'driver4'),
+(5,'driver5'),
+(6,'driver6')
+;
+
+drop table if exists speeds;
+
+create table speeds
+(
+	route_id int,
+	driver_id int, 
+	speed int
+)
+;
+
+Insert into speeds
+values
+(103,1,35),
+(103,2,40),
+(103,3,45),
+(24,1,55),
+(24,3,55),
+(24,6,60),
+(24,4,62),
+(31,1,70),
+(31,3,80),
+(31,4,82),
+(421,1,65),
+(421,2,70),
+(421,4,75)
+;
+
+--ANSWER 
+
+with score_comps as 
+(
+	select 
+	t1.*
+	,t2.speed
+	,min(t2.speed) over (partition by t2.route_id) as min_speed
+	,max(t2.speed) over (partition by t2.route_id) as max_speed
+	from driver t1
+	join speeds t2 on t1.driver_id=t2.driver_id
+)
+
+
+
+select distinct t1.driver_id, t1.driver_name from score_comps t1
+except
+select distinct t1.driver_id, t1.driver_name from score_comps t1 where (t1.speed=min_speed or t1.speed=t1.max_speed)
+;
+
 
 
 
