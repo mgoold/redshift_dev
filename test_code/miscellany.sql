@@ -299,6 +299,58 @@ select distinct t1.driver_id, t1.driver_name from score_comps t1 where (t1.speed
 ;
 
 
+--FIND BIGGEST WINDOW ON PARTITION
+
+--Given the below tables, write a solution that will, for each employee_id, find out the largest window of days between the dates they worked in-office.  
+-- If there is no day after, substitute "today's" date. --Assume today's date is '2022-2-4'.
+
+--Return the result table ordered by employee_id.
+
+-- NOTES: NOTICE WHETHER THE WORD PROBLEM IS COMPARING SOMETHING VS THE THING BEFORE (--> LAG), OR THING AFTER (--> LEAD FUNCTION)
+-- "FIRST" VALUE -->, "LAST VALUE" --> LEAD
+-- "the one right after it (or today if you are considering the last visit)." --> LEAD FUNCTION
+
+-- ANSWER
+
+DROP TABLE IF EXISTS employee_in_office_dates;
+
+CREATE TABLE employee_in_office_dates
+(
+	employee_id int,
+	in_office_date date
+)
+;
+
+INSERT INTO employee_in_office_dates
+VALUES
+(1,'2021-07-31'),
+(1,'2021-08-22'),
+(1,'2021-09-3'),
+(2,'2021-11-5'),
+(2,'2021-11-9'),
+(3,'2021-12-03')
+;
+
+select
+t1.employee_id
+,max(daylag) max_window
+from
+(
+	select
+	t1.*
+	,lead_in_date-in_office_date daylag
+	from
+	(
+		select
+		t1.*
+		,coalesce(lead(t1.in_office_date,1) over (partition by employee_id order by t1.in_office_date),'2022-2-4') lead_in_date
+		from employee_in_office_dates t1
+	) t1
+) t1
+group by 1
+order by 1
+;
+
 
 
 
