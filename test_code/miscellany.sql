@@ -351,6 +351,62 @@ group by 1
 order by 1
 ;
 
+-- FINDING COMMON MAX VALUES PER PARTITION
+
+-- GIVEN THE BELOW TABLES, FIND THE VIEWERS WHO WATCHED THE MOST HOURS PER SHOW
+	-- IN CASE OF TIE, RETRIEVE ALL VIEWERS PER SHOW WITH THE SAME NUMBER OF HOURS
+
+drop table if exists shows;
+
+create table shows
+(
+	show_id int,
+	viewer_id int
+)
+;
+
+insert into shows
+values
+(1,1),
+(1,2),
+(1,3),
+(2,1),
+(2,4)
+;
+
+drop table if exists viewer;
+
+create table viewer
+(
+	viewer_id int,
+	viewer_name   varchar,
+	hours_watched int
+)
+;
+
+
+insert into viewer
+values
+(1,'viewer1',3),
+(2,'viewer2',2),
+(3,'viewer3',3),
+(4,'viewer4',2)
+;
+
+
+select
+t1.*
+from
+(
+	select 
+	t1.*
+	,dense_rank() over (partition by t1.show_id order by t2.hours_watched desc) hours_rank
+	from shows t1
+	join viewer t2 on t1.viewer_id=t2.viewer_id
+) t1
+where 1=1
+and t1.hours_rank=1
+;
 
 
 
